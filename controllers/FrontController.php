@@ -328,7 +328,8 @@ class FrontController
 //                 'locale'      => $this->localeManager->getLocale(),
 //             ]
 //         );
-
+        $json_output = json_decode($response, JSON_PRETTY_PRINT); 
+        echo $json_output;
         return $response;
     }
 
