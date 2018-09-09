@@ -95,9 +95,9 @@ class VideoDownload
             '--'.$prop,
             $url,
         ];
-        if (isset($format)) {
+        // if (isset($format)) {
             $arguments[] = '-f 22,18,43,36,17';
-        }
+        // }
         if (isset($password)) {
             $arguments[] = '--video-password';
             $arguments[] = $password;
