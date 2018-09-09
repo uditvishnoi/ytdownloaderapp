@@ -328,10 +328,10 @@ class FrontController
 //                 'locale'      => $this->localeManager->getLocale(),
 //             ]
 //         );
-        echo $title;
-        echo $description;
-        echo '<pre>'; print_r($video); echo '</pre>';
-        $json_output = json_decode($video, JSON_PRETTY_PRINT); 
+//         echo $title;
+//         echo $description;
+//         echo '<pre>'; print_r($video); echo '</pre>';
+         $json_output = json_decode($video, JSON_PRETTY_PRINT); 
         echo $json_output;
         return $response;
     }
