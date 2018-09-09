@@ -298,7 +298,8 @@ class FrontController
         } catch (PasswordException $e) {
             return $this->password($request, $response);
         }
-         var_dump($video);
+         $data = json_encode((array)$video);
+         echo $data;
         return $response;
     }
 
