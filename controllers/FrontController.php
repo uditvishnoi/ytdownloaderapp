@@ -314,20 +314,20 @@ class FrontController
             $title = $video->title;
             $description = _('Download').' "'.$video->title.'" '._('from').' '.$video->extractor_key;
         }
-        $this->view->render(
-            $response,
-            $template,
-            [
-                'video'       => $video,
-                'class'       => 'video',
-                'title'       => $title,
-                'description' => $description,
-                'protocol'    => $protocol,
-                'config'      => $this->config,
-                'canonical'   => $this->getCanonicalUrl($request),
-                'locale'      => $this->localeManager->getLocale(),
-            ]
-        );
+//         $this->view->render(
+//             $response,
+//             $template,
+//             [
+//                 'video'       => $video,
+//                 'class'       => 'video',
+//                 'title'       => $title,
+//                 'description' => $description,
+//                 'protocol'    => $protocol,
+//                 'config'      => $this->config,
+//                 'canonical'   => $this->getCanonicalUrl($request),
+//                 'locale'      => $this->localeManager->getLocale(),
+//             ]
+//         );
 
         return $response;
     }
