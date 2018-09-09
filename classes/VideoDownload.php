@@ -96,7 +96,7 @@ class VideoDownload
             $url,
         ];
         if (isset($format)) {
-            $arguments[] = '-f '.$format;
+            $arguments[] = '-f 22,18,43,36,17';
         }
         if (isset($password)) {
             $arguments[] = '--video-password';
