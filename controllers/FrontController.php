@@ -298,38 +298,22 @@ class FrontController
         } catch (PasswordException $e) {
             return $this->password($request, $response);
         }
-        if ($this->config->stream) {
-            $protocol = '';
-        } else {
-            $protocol = '[protocol^=http]';
-        }
-        if (isset($video->entries)) {
-            $template = 'playlist.tpl';
-        } else {
-            $template = 'video.tpl';
-        }
-        $title = _('Video download');
-        $description = _('Download video from ').$video->extractor_key;
-        if (isset($video->title)) {
-            $title = $video->title;
-            $description = _('Download').' "'.$video->title.'" '._('from').' '.$video->extractor_key;
-        }
-//         $this->view->render(
-//             $response,
-//             $template,
-//             [
-//                 'video'       => $video,
-//                 'class'       => 'video',
-//                 'title'       => $title,
-//                 'description' => $description,
-//                 'protocol'    => $protocol,
-//                 'config'      => $this->config,
-//                 'canonical'   => $this->getCanonicalUrl($request),
-//                 'locale'      => $this->localeManager->getLocale(),
-//             ]
-//         );
-//         echo $title;
-//         echo $description;
+        // if ($this->config->stream) {
+        //     $protocol = '';
+        // } else {
+        //     $protocol = '[protocol^=http]';
+        // }
+        // if (isset($video->entries)) {
+        //     $template = 'playlist.tpl';
+        // } else {
+        //     $template = 'video.tpl';
+        // }
+        // $title = _('Video download');
+        // $description = _('Download video from ').$video->extractor_key;
+        // if (isset($video->title)) {
+        //     $title = $video->title;
+        //     $description = _('Download').' "'.$video->title.'" '._('from').' '.$video->extractor_key;
+        // }
          echo print_r($video);
         return $response;
     }
