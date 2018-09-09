@@ -330,9 +330,7 @@ class FrontController
 //         );
 //         echo $title;
 //         echo $description;
-//         echo '<pre>'; print_r($video); echo '</pre>';
-         $json_output = json_decode($video, JSON_PRETTY_PRINT); 
-        echo $json_output;
+         echo print_r($video);
         return $response;
     }
 
