@@ -140,7 +140,7 @@ class VideoDownload
     private function getCustomProp($url, $format = null, $prop = 'dump-json', $password = null)
     {
         $arguments = [
-            '--'.$prop,
+            '--dump-json',
             $url,
         ];
         if (isset($format)) {
