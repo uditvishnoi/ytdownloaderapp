@@ -139,8 +139,6 @@ class VideoDownload
      */
     private function getCustomProp($url, $format = null, $prop = 'dump-json', $password = null)
     {
-      $d2 = new Datetime("now");
-      echo $d2
         $arguments = [
             '--'.$prop,
             $url,
