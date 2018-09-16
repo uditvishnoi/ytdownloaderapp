@@ -335,6 +335,55 @@ class FrontController
     }
 
     /**
+     * Return the video custom description page.
+     *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     * @param array    $params   GET query parameters
+     * @param string   $password Video password
+     *
+     * @return Response HTTP response
+     */
+    private function getVideoCustomResponse(Request $request, Response $response, array $params, $password = null)
+    {
+        try {
+            $video = $this->download->getCustomJSON($params['url'], $this->defaultFormat, $password);
+        } catch (PasswordException $e) {
+            return $this->password($request, $response);
+        }
+         $data = json_encode((array)$video);
+         echo $data;
+        return $response;
+    }
+
+
+    /**
+     * Dislay custom information about the video.
+     *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     *
+     * @return Response HTTP response
+     */
+    public function videoCustomInfo(Request $request, Response $response)
+    {
+        $params = $request->getQueryParams();
+
+        if (!isset($params['url']) && isset($params['v'])) {
+            $params['url'] = $params['v'];
+        }
+
+        if (isset($params['url']) && !empty($params['url'])) {
+            $password = $request->getParam('password');
+            if (isset($password)) {
+                $this->sessionSegment->setFlash($params['url'], $password);
+            }
+                return $this->getVideoCustomResponse($request, $response, $params, $password);
+        } else {
+            return $response->withRedirect($this->container->get('router')->pathFor('index'));
+        }
+    }
+    /**
      * Display an error page.
      *
      * @param Request   $request   PSR-7 request
