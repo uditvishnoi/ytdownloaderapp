@@ -102,6 +102,54 @@ class VideoDownload
             $arguments[] = '--video-password';
             $arguments[] = $password;
         }
+        console.log($arguments);
+        $process = $this->getProcess($arguments);
+        //This is needed by the openload extractor because it runs PhantomJS
+        $process->setEnv(['PATH'=>$this->config->phantomjsDir]);
+        $process->inheritEnvironmentVariables();
+        $process->run();
+        if (!$process->isSuccessful()) {
+            $errorOutput = trim($process->getErrorOutput());
+            $exitCode = $process->getExitCode();
+            if ($errorOutput == 'ERROR: This video is protected by a password, use the --video-password option') {
+                throw new PasswordException($errorOutput, $exitCode);
+            } elseif (substr($errorOutput, 0, 21) == 'ERROR: Wrong password') {
+                throw new Exception(_('Wrong password'), $exitCode);
+            } else {
+                throw new Exception($errorOutput, $exitCode);
+            }
+        } else {
+            return trim($process->getOutput());
+        }
+    }
+
+    /**
+     * Get a custom from youtube-dl.
+     *
+     * @param string $url      URL to parse
+     * @param string $format   Format
+     * @param string $prop     Property
+     * @param string $password Video password
+     *
+     * @throws PasswordException If the video is protected by a password and no password was specified
+     * @throws Exception         If the password is wrong
+     * @throws Exception         If youtube-dl returns an error
+     *
+     * @return string
+     */
+    private function getCustomProp($url, $format = null, $prop = 'dump-json', $password = null)
+    {
+        $arguments = [
+            '--'.$prop,
+            $url,
+        ];
+        if (isset($format)) {
+            $arguments[] = '-f '.$format;
+        }
+        if (isset($password)) {
+            $arguments[] = '--video-password';
+            $arguments[] = $password;
+        }
 
         $process = $this->getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
@@ -137,6 +185,20 @@ class VideoDownload
         return json_decode($this->getProp($url, $format, 'dump-single-json', $password));
     }
 
+
+    /**
+     * Get custom information about a video.
+     *
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
+     *
+     * @return object Decoded JSON
+     * */
+    public function getCustomJSON($url, $format = null, $password = null)
+    {
+        return json_decode($this->getCustomProp($url, $format, 'dump-single-json', $password));
+    }
     /**
      * Get URL of video from URL of page.
      *
