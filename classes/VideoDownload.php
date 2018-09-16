@@ -140,8 +140,9 @@ class VideoDownload
     private function getCustomProp($url, $format = null, $prop = 'dump-json', $password = null)
     {
         $arguments = [
-            '-o',
+            '--dump-json',
             $url,
+            '-o'
         ];
         if (isset($format)) {
             $arguments[] = '-f 22/17/18';
