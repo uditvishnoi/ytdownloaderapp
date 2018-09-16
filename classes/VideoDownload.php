@@ -102,7 +102,7 @@ class VideoDownload
             $arguments[] = '--video-password';
             $arguments[] = $password;
         }
-        console.log($arguments);
+
         $process = $this->getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
         $process->setEnv(['PATH'=>$this->config->phantomjsDir]);
@@ -139,6 +139,8 @@ class VideoDownload
      */
     private function getCustomProp($url, $format = null, $prop = 'dump-json', $password = null)
     {
+      $d2 = new Datetime("now");
+      echo $d2
         $arguments = [
             '--'.$prop,
             $url,
@@ -150,7 +152,9 @@ class VideoDownload
             $arguments[] = '--video-password';
             $arguments[] = $password;
         }
-
+        foreach ($arguments as $key => $val) {
+           echo $val;
+        }
         $process = $this->getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
         $process->setEnv(['PATH'=>$this->config->phantomjsDir]);
