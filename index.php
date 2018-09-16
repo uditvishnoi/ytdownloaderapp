@@ -48,6 +48,10 @@ $app->any(
     [$controller, 'video']
 )->setName('video');
 $app->any(
+    '/videoCustomInfo',
+    [$controller, 'videoCustomInfo']
+)->setName('videoCustomInfo');
+$app->any(
     '/watch',
     [$controller, 'video']
 );
