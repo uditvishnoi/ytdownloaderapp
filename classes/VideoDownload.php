@@ -144,14 +144,11 @@ class VideoDownload
             $url,
         ];
         // if (isset($format)) {
-            $arguments[] = '-f '.'22,17,18';
+            $arguments[] = '--all-formats';
         // }
         if (isset($password)) {
             $arguments[] = '--video-password';
             $arguments[] = $password;
-        }
-        foreach ($arguments as $key => $val) {
-           echo $val;
         }
         $process = $this->getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
