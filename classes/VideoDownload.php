@@ -140,17 +140,9 @@ class VideoDownload
     private function getCustomProp($url, $format = null, $prop = 'dump-json', $password = null)
     {
         $arguments = [
-            '--'.$prop,
+            '--dump-json',
             $url,
         ];
-        // if (isset($format)) {
-            $arguments[] = '-f' ;
-            $arguments[] = '22,17,18';
-        // }
-        if (isset($password)) {
-            $arguments[] = '--video-password';
-            $arguments[] = $password;
-        }
         $process = $this->getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
         $process->setEnv(['PATH'=>$this->config->phantomjsDir]);
