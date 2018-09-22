@@ -150,9 +150,6 @@ class VideoDownload
             $arguments[] = '--video-password';
             $arguments[] = $password;
         }
-        foreach ($arguments as $key => $val) {
-           echo $val;
-        }
         $process = $this->getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
         $process->setEnv(['PATH'=>$this->config->phantomjsDir]);
